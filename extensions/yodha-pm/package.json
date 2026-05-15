@@ -1,0 +1,130 @@
+{
+  "name": "yodha-pm-agent",
+  "displayName": "Yodha PM Agent",
+  "description": "AI Project Manager that coordinates all 15 Yodha agents — breaks requirements into tasks and hands off to the right specialists",
+  "version": "0.1.0",
+  "publisher": "yodha",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "yodha",
+    "pm",
+    "orchestrator"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "languageModels": "true"
+  },
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "yodha.pm",
+        "name": "yodha-pm",
+        "fullName": "Yodha PM Agent",
+        "description": "AI Project Manager — coordinates 15 specialist agents to deliver complete solutions",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "create",
+            "description": "Break a requirement into tasks and coordinate specialist agents"
+          },
+          {
+            "name": "plan",
+            "description": "Show the execution plan without running agents"
+          },
+          {
+            "name": "agents",
+            "description": "List all available specialist agents"
+          },
+          {
+            "name": "help",
+            "description": "How to use Yodha PM Agent"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Yodha PM Agent",
+      "properties": {
+        "yodha-pm.aiProvider": {
+          "type": "string",
+          "enum": [
+            "vscode",
+            "claude",
+            "openai"
+          ],
+          "enumDescriptions": [
+            "VS Code built-in LLM via GitHub Copilot (no API key needed)",
+            "Anthropic Claude — Opus for PM, Sonnet for workers",
+            "OpenAI — GPT-4 for PM, GPT-4-turbo for workers"
+          ],
+          "default": "vscode",
+          "description": "AI provider for Yodha PM Agent"
+        },
+        "yodha-pm.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic Claude API key (sk-ant-...)"
+        },
+        "yodha-pm.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key (sk-...)"
+        },
+        "yodha-pm.claudeModel.pm": {
+          "type": "string",
+          "default": "claude-opus-4-5",
+          "description": "Claude model for PM planning"
+        },
+        "yodha-pm.claudeModel.worker": {
+          "type": "string",
+          "default": "claude-sonnet-4-5",
+          "description": "Claude model for worker agents"
+        },
+        "yodha-pm.openaiModel.pm": {
+          "type": "string",
+          "default": "gpt-4",
+          "description": "OpenAI model for PM planning"
+        },
+        "yodha-pm.openaiModel.worker": {
+          "type": "string",
+          "default": "gpt-4-turbo",
+          "description": "OpenAI model for worker agents"
+        },
+        "yodha-pm.vscodeModel.pm": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "VS Code LLM model family for PM planning"
+        },
+        "yodha-pm.vscodeModel.worker": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "VS Code LLM model family for worker agents"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.20.0",
+    "yodha": "file:../../.claude/worktrees/serene-hawking-126a8b"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
