@@ -1,0 +1,188 @@
+{
+  "name": "yodha",
+  "displayName": "Yodha - AI Engineering Team",
+  "description": "15 independent AI agents with PM coordination, powered by Claude, OpenAI GPT-4, or VS Code LLM",
+  "version": "0.1.0",
+  "publisher": "yodha",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "agents",
+    "claude",
+    "openai",
+    "copilot"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "languageModels": "true"
+  },
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "yodha.assistant",
+        "name": "yodha",
+        "fullName": "Yodha AI Engineering Team",
+        "description": "15 specialized AI agents: backend, frontend, cloud, QA, DevOps, and more",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "agents",
+            "description": "List all available agents and their capabilities"
+          },
+          {
+            "name": "create",
+            "description": "Create a complete solution using the appropriate agents"
+          },
+          {
+            "name": "backend",
+            "description": "Engage the Backend Developer agent"
+          },
+          {
+            "name": "frontend",
+            "description": "Engage the Frontend Developer agent"
+          },
+          {
+            "name": "cloud",
+            "description": "Engage the Cloud Architect agent"
+          },
+          {
+            "name": "qa",
+            "description": "Engage the QA Engineer agent"
+          },
+          {
+            "name": "devops",
+            "description": "Engage the DevOps Engineer agent"
+          },
+          {
+            "name": "db",
+            "description": "Engage the Database Architect agent"
+          },
+          {
+            "name": "data",
+            "description": "Engage the Data Engineer agent"
+          },
+          {
+            "name": "mobile",
+            "description": "Engage the Mobile Developer agent"
+          },
+          {
+            "name": "ux",
+            "description": "Engage the UX Designer agent"
+          },
+          {
+            "name": "api",
+            "description": "Engage the API Specification agent"
+          },
+          {
+            "name": "ml",
+            "description": "Engage the ML Engineer agent"
+          },
+          {
+            "name": "security",
+            "description": "Engage the Security Engineer agent"
+          },
+          {
+            "name": "perf",
+            "description": "Engage the Performance Engineer agent"
+          },
+          {
+            "name": "docs",
+            "description": "Engage the Technical Writer agent"
+          },
+          {
+            "name": "compliance",
+            "description": "Engage the Compliance agent"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Yodha AI Engineering Team",
+      "properties": {
+        "yodha.aiProvider": {
+          "type": "string",
+          "enum": ["claude", "openai", "vscode"],
+          "enumDescriptions": [
+            "Anthropic Claude (requires yodha.claudeApiKey)",
+            "OpenAI GPT-4 (requires yodha.openaiApiKey)",
+            "VS Code built-in LLM via GitHub Copilot (no API key needed)"
+          ],
+          "default": "vscode",
+          "description": "AI provider to use for Yodha agents"
+        },
+        "yodha.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic Claude API key (sk-ant-...)"
+        },
+        "yodha.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key (sk-...)"
+        },
+        "yodha.claudeModel.pm": {
+          "type": "string",
+          "default": "claude-opus-4-5",
+          "description": "Claude model for PM-Agent (orchestrator)"
+        },
+        "yodha.claudeModel.worker": {
+          "type": "string",
+          "default": "claude-sonnet-4-5",
+          "description": "Claude model for worker agents"
+        },
+        "yodha.openaiModel.pm": {
+          "type": "string",
+          "default": "gpt-4",
+          "description": "OpenAI model for PM-Agent (orchestrator)"
+        },
+        "yodha.openaiModel.worker": {
+          "type": "string",
+          "default": "gpt-4-turbo",
+          "description": "OpenAI model for worker agents"
+        },
+        "yodha.vscodeModel.pm": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "VS Code LLM model family for PM-Agent (e.g. gpt-4o, claude-3.5-sonnet)"
+        },
+        "yodha.vscodeModel.worker": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "VS Code LLM model family for worker agents (e.g. gpt-4o-mini, gpt-4o)"
+        },
+        "yodha.maxTokens": {
+          "type": "number",
+          "default": 4096,
+          "description": "Maximum tokens per agent response"
+        },
+        "yodha.streamingEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable streaming responses from agents"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

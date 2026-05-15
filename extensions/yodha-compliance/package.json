@@ -1,0 +1,101 @@
+{
+  "name": "yodha-compliance-agent",
+  "displayName": "Yodha Compliance Engineer",
+  "description": "AI compliance engineer: GDPR, SOC2, HIPAA, audit logs, data governance",
+  "version": "0.1.0",
+  "publisher": "yodha",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "yodha",
+    "compliance"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "languageModels": "true"
+  },
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "yodha.compliance",
+        "name": "yodha-compliance",
+        "fullName": "Yodha Compliance Engineer",
+        "description": "AI compliance engineer: GDPR, SOC2, HIPAA, audit logs, data governance",
+        "isSticky": false,
+        "commands": [
+          {
+            "name": "help",
+            "description": "Show Compliance Engineer capabilities"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Yodha Compliance Engineer",
+      "properties": {
+        "yodha-compliance.aiProvider": {
+          "type": "string",
+          "enum": [
+            "vscode",
+            "claude",
+            "openai"
+          ],
+          "enumDescriptions": [
+            "VS Code built-in LLM via GitHub Copilot (no API key needed)",
+            "Anthropic Claude (requires claudeApiKey)",
+            "OpenAI GPT-4 (requires openaiApiKey)"
+          ],
+          "default": "vscode",
+          "description": "AI provider for this agent"
+        },
+        "yodha-compliance.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic Claude API key (sk-ant-...)"
+        },
+        "yodha-compliance.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key (sk-...)"
+        },
+        "yodha-compliance.claudeModel": {
+          "type": "string",
+          "default": "claude-sonnet-4-5",
+          "description": "Claude model to use"
+        },
+        "yodha-compliance.openaiModel": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "OpenAI model to use"
+        },
+        "yodha-compliance.vscodeModel": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "VS Code LLM model family (e.g. gpt-4o, gpt-4o-mini)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

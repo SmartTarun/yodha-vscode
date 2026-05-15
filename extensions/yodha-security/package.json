@@ -1,0 +1,101 @@
+{
+  "name": "yodha-security-agent",
+  "displayName": "Yodha Security Engineer",
+  "description": "AI security engineer: OWASP, SAST, auth, encryption, threat modeling",
+  "version": "0.1.0",
+  "publisher": "yodha",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "yodha",
+    "security"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "languageModels": "true"
+  },
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "yodha.security",
+        "name": "yodha-security",
+        "fullName": "Yodha Security Engineer",
+        "description": "AI security engineer: OWASP, SAST, auth, encryption, threat modeling",
+        "isSticky": false,
+        "commands": [
+          {
+            "name": "help",
+            "description": "Show Security Engineer capabilities"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Yodha Security Engineer",
+      "properties": {
+        "yodha-security.aiProvider": {
+          "type": "string",
+          "enum": [
+            "vscode",
+            "claude",
+            "openai"
+          ],
+          "enumDescriptions": [
+            "VS Code built-in LLM via GitHub Copilot (no API key needed)",
+            "Anthropic Claude (requires claudeApiKey)",
+            "OpenAI GPT-4 (requires openaiApiKey)"
+          ],
+          "default": "vscode",
+          "description": "AI provider for this agent"
+        },
+        "yodha-security.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic Claude API key (sk-ant-...)"
+        },
+        "yodha-security.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key (sk-...)"
+        },
+        "yodha-security.claudeModel": {
+          "type": "string",
+          "default": "claude-sonnet-4-5",
+          "description": "Claude model to use"
+        },
+        "yodha-security.openaiModel": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "OpenAI model to use"
+        },
+        "yodha-security.vscodeModel": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "VS Code LLM model family (e.g. gpt-4o, gpt-4o-mini)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

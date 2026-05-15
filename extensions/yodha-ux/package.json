@@ -1,0 +1,101 @@
+{
+  "name": "yodha-ux-agent",
+  "displayName": "Yodha UX Designer",
+  "description": "AI UX designer: design systems, Tailwind UI, accessibility, wireframes",
+  "version": "0.1.0",
+  "publisher": "yodha",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "yodha",
+    "ux"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "languageModels": "true"
+  },
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "yodha.ux",
+        "name": "yodha-ux",
+        "fullName": "Yodha UX Designer",
+        "description": "AI UX designer: design systems, Tailwind UI, accessibility, wireframes",
+        "isSticky": false,
+        "commands": [
+          {
+            "name": "help",
+            "description": "Show UX Designer capabilities"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Yodha UX Designer",
+      "properties": {
+        "yodha-ux.aiProvider": {
+          "type": "string",
+          "enum": [
+            "vscode",
+            "claude",
+            "openai"
+          ],
+          "enumDescriptions": [
+            "VS Code built-in LLM via GitHub Copilot (no API key needed)",
+            "Anthropic Claude (requires claudeApiKey)",
+            "OpenAI GPT-4 (requires openaiApiKey)"
+          ],
+          "default": "vscode",
+          "description": "AI provider for this agent"
+        },
+        "yodha-ux.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic Claude API key (sk-ant-...)"
+        },
+        "yodha-ux.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key (sk-...)"
+        },
+        "yodha-ux.claudeModel": {
+          "type": "string",
+          "default": "claude-sonnet-4-5",
+          "description": "Claude model to use"
+        },
+        "yodha-ux.openaiModel": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "OpenAI model to use"
+        },
+        "yodha-ux.vscodeModel": {
+          "type": "string",
+          "default": "gpt-4o",
+          "description": "VS Code LLM model family (e.g. gpt-4o, gpt-4o-mini)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
